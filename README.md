@@ -13,3 +13,9 @@ non-developers through Claude Code.
 
 This copy is a demonstration: tracking IDs are placeholders and the form adapters build the
 provider requests without sending them.
+
+## Credits
+- Texts and photos of the Vertical Printers pages: verticalprinters.com, used for this demonstration
+  only; they remain the property of Vertical Printers.
+- Fonts: Fira Sans (Mozilla Foundation and Telefonica, SIL Open Font License) and Poppins
+  (Indian Type Foundry, SIL Open Font License); licenses in `brands/vertical-printers/assets/fonts/`.

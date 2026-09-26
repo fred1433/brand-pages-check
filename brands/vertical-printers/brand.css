@@ -4,9 +4,10 @@
 @font-face { font-family: "VP Display"; src: url("./assets/fonts/fira-semibold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
 @font-face { font-family: "VP Sans"; src: url("./assets/fonts/fira-regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "VP Sans"; src: url("./assets/fonts/fira-medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "VP Book"; src: url("./assets/fonts/vogue-light.otf") format("opentype"); font-weight: 300; font-display: swap; }
-@font-face { font-family: "VP Book"; src: url("./assets/fonts/vogue-book.otf") format("opentype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "VP Book"; src: url("./assets/fonts/vogue-demi.otf") format("opentype"); font-weight: 500; font-display: swap; }
+
+@font-face { font-family: "VP Book"; src: url("./assets/fonts/poppins-300.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "VP Book"; src: url("./assets/fonts/poppins-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "VP Book"; src: url("./assets/fonts/poppins-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 
 @theme {
   --color-ink: #000000;
@@ -17,7 +18,7 @@
   --color-mist: #f4f4f5;
   --font-display: "VP Display", "Fira Sans", Arial, sans-serif;
   --font-sans: "VP Sans", "Fira Sans", Arial, sans-serif;
-  --font-book: "VP Book", "Century Gothic", Arial, sans-serif;
+  --font-book: "VP Book", "Poppins", "Century Gothic", Arial, sans-serif;
 }
 
 html { color: var(--color-body); background: #fff; }
