@@ -22,7 +22,7 @@ export function enhanceLeadForms(root = document) {
         if (!res.ok || !receipt.ok) throw new Error(receipt.error || 'The request was not accepted.');
         trackLead(receipt, receipt.conversion || 'lead');
         form.dataset.state = 'sent';
-        if (status) status.textContent = form.dataset.success || 'Thanks. We will be in touch within one business day.';
+        if (status) status.textContent = form.dataset.success || 'Demo complete. No request was sent.';
         window.dispatchEvent(new CustomEvent('bp:lead', { detail: receipt }));
       } catch (e) {
         form.dataset.state = 'error';

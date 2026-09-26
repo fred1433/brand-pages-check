@@ -46,7 +46,7 @@ export async function handleLead({ brand, request, vercelEnv, now = Date.now(), 
     destination: dest.list,
     environment: dest.environment,
     conversion: dest.conversion,
-    delivery: 'demo sink (not sent to any account)',
+    delivery: 'simulated: nothing was sent to any account',
     ignoredClientFields: ignored,
     request: sanitizedRequest(built),
   });

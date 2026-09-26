@@ -1,12 +1,4 @@
-# Changes to these paths need the developer's review before they can be merged.
-/.github/            @fred1433
-/.claude/            @fred1433
-/CLAUDE.md           @fred1433
-/packages/           @fred1433
-/tests/              @fred1433
-/scripts/            @fred1433
-/playwright.config.mjs @fred1433
-/brands/*/brand.config.json @fred1433
-/brands/*/sections/  @fred1433
-/package.json        @fred1433
-/pnpm-lock.yaml      @fred1433
+# Everything needs the developer's review, except page content.
+*                             @fred1433
+# Page content: owners publish it themselves once the required checks pass.
+/apps/*/content/pages/

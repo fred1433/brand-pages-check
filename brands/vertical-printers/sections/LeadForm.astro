@@ -9,7 +9,7 @@ const { id, form, headline, text, button, success } = Astro.props;
       {text && <p class="vp-book mt-5 max-w-[44ch] text-[18px] leading-relaxed text-white/75">{text}</p>}
     </div>
     <form data-lead-form data-form-key={form} data-success={success} class="flex flex-col gap-4 self-end">
-      <p class="rounded-full border border-white/30 px-4 py-2 font-sans text-[14px] text-white/85">Demonstration form: entries go to a demo list, not to Vertical Printers.</p>
+      <p class="rounded-full border border-white/30 px-4 py-2 font-sans text-[14px] text-white/85">Test form only. Nothing is sent to Vertical Printers or an email service.</p>
       <label class="font-sans text-[14px] text-white/70">First name
         <input name="firstName" autocomplete="given-name" required class="mt-2 block w-full rounded-full border border-white/25 bg-transparent px-5 py-3.5 text-[16px] text-white placeholder-white/40 outline-none focus:border-white" />
       </label>

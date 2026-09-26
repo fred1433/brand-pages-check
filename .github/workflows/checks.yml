@@ -46,14 +46,18 @@ jobs:
         run: BP_ONLY=${{ matrix.brand }} node scripts/check-links.mjs
       - name: tracking and forms in a real browser
         run: BP_BRANDS=${{ matrix.brand }} npx playwright test
-      - name: build the preview deployment
-        run: node scripts/build-brand.mjs ${{ matrix.brand }} preview vercel
+      - name: build the preview deployment and its route manifest
+        run: |
+          node scripts/build-brand.mjs ${{ matrix.brand }} preview vercel
+          node scripts/route-manifest.mjs ${{ matrix.brand }} apps/${{ matrix.brand }}/.vercel/route-manifest.json
       - uses: actions/upload-artifact@v4
         with:
           name: preview-${{ matrix.brand }}
-          path: apps/${{ matrix.brand }}/.vercel/output
+          path: |
+            apps/${{ matrix.brand }}/.vercel/output
+            apps/${{ matrix.brand }}/.vercel/route-manifest.json
           include-hidden-files: true
-          retention-days: 3
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -4,71 +4,173 @@
     "hero": {
       "purpose": "Opening block: a dark photo panel with the page headline and one button.",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "text": { "type": "text", "max": 220 },
-        "image": { "type": "asset" },
-        "cta": { "type": "link" }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "text": {
+          "type": "text",
+          "max": 220
+        },
+        "image": {
+          "type": "asset"
+        },
+        "cta": {
+          "type": "link"
+        }
       }
     },
     "machine": {
       "purpose": "The VP-G6 on a light panel with its key specifications.",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "text": { "type": "text", "max": 300 },
-        "specs": { "type": "list", "max": 8 }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "text": {
+          "type": "text",
+          "max": 300
+        },
+        "specs": {
+          "type": "list",
+          "max": 8
+        }
       }
     },
     "walls": {
       "purpose": "A strip of real customer walls printed with the machine.",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "images": { "type": "assets", "min": 2, "max": 4 }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "images": {
+          "type": "assets",
+          "min": 2,
+          "max": 4
+        }
       }
     },
     "steps": {
       "purpose": "A short numbered sequence (what happens next, how a day runs).",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "steps": { "type": "items", "min": 2, "max": 4, "itemFields": ["title", "text"] }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "steps": {
+          "type": "items",
+          "min": 2,
+          "max": 4,
+          "itemFields": [
+            "title",
+            "text"
+          ]
+        }
       }
     },
     "founders": {
       "purpose": "Marc and Mark, with a few lines on why they built the machine.",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "text": { "type": "text", "required": true, "max": 500 }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "text": {
+          "type": "text",
+          "required": true,
+          "max": 500
+        }
       }
     },
     "testimonials": {
       "purpose": "Quotes from Academy members, picked by id.",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "quotes": { "type": "quoteIds", "min": 1, "max": 4 }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "quotes": {
+          "type": "quoteIds",
+          "min": 1,
+          "max": 4
+        }
       }
     },
     "faq": {
       "purpose": "Questions and answers.",
       "fields": {
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "items": { "type": "items", "min": 1, "max": 8, "itemFields": ["q", "a"] }
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "items": {
+          "type": "items",
+          "min": 1,
+          "max": 8,
+          "itemFields": [
+            "q",
+            "a"
+          ]
+        }
       }
     },
     "lead-form": {
       "purpose": "A short form (first name, email). Where it goes is set in the brand config, never on the page.",
       "fields": {
-        "id": { "type": "anchor", "required": true },
-        "form": { "type": "formKey", "required": true },
-        "headline": { "type": "text", "required": true, "max": 70 },
-        "text": { "type": "text", "max": 300 },
-        "button": { "type": "text", "required": true, "max": 40 },
-        "success": { "type": "text", "max": 160 }
+        "id": {
+          "type": "anchor",
+          "required": true
+        },
+        "form": {
+          "type": "formKey",
+          "required": true
+        },
+        "headline": {
+          "type": "text",
+          "required": true,
+          "max": 70
+        },
+        "text": {
+          "type": "text",
+          "max": 300
+        },
+        "button": {
+          "type": "text",
+          "required": true,
+          "max": 40
+        },
+        "success": {
+          "type": "text",
+          "max": 160
+        }
       }
     }
   },
   "quotes": {
-    "gene": { "text": "Thanks to their help, we were able to secure a local mall as a client just weeks after we started our business, and within the first year of operation we have expanded the relationship to nearly a dozen malls!", "who": "Gene G., Wall Fire Studios, Wimberley, Texas" },
-    "justin": { "text": "Selling wasn't my strong suit when I started, but thanks to the guidance of the team I was able to build a sales strategy that worked for me.", "who": "Justin W., Wittez, Greenville, South Carolina" },
-    "shawn-rita": { "text": "The thought of learning a new technology AND a new business seemed overwhelming. My confidence is up and I know more about this business than I ever imagined.", "who": "Shawn and Rita, Vertical Imaging Creations, St. Louis, Missouri" },
-    "charles-aileen": { "text": "Using their sales tips, we were able to hit the ground running in the first month! They taught us how to turn one job into many jobs with the same client.", "who": "Charles and Aileen, Prints Ink, Hamilton, Ontario" }
-  }
+    "gene": {
+      "text": "The team at Vertical Printers helped us so much when we started. […] Thanks to their help, we were able to secure a local mall as a client just weeks after we started our business, and within the first year of operation we have expanded the relationship to nearly a dozen malls!",
+      "who": "Gene G., Wall Fire Studios, Wimberley, Texas"
+    },
+    "justin": {
+      "text": "Selling wasn't my strong suit when I started, but thanks to the guidance of The Vertical Printers team I was able to build a sales strategy that worked for me. They showed me how to talk to clients about the application, and the benefits, which helped build a long standing list of clients.",
+      "who": "Justin W., Wittez, Greenville, South Carolina"
+    },
+    "shawn-rita": {
+      "text": "I was very nervous before starting my wall printing business. The thought of learning a new technology AND a new business seemed overwhelming. Thanks to the guidance of the team at the Vertical Printers, my confidence is up and I know more about this business than I ever imagined. […]",
+      "who": "Shawn and Rita, Vertical Imaging Creations, St. Louis, Missouri"
+    },
+    "charles-aileen": {
+      "text": "[…] Using their sales tips, we were able to hit the ground running in the first month! They taught us how to turn one job into many jobs with the same client. […]",
+      "who": "Charles and Aileen, Prints Ink, Hamilton, Ontario"
+    }
+  },
+  "quotesSource": "Quoted from verticalprinters.com/vp-g6; cuts are marked […]."
 }

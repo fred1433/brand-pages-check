@@ -1,5 +1,6 @@
-// One interface for both email tools. Each adapter builds the exact request the provider's API
-// would receive. In this demonstration the transport is a local sink: nothing leaves the server.
+// One interface for both email tools. These adapters are illustrative: they show the shape of a
+// provider request (list names stand in for list and group IDs, field names for field IDs) and
+// are not verified provider contracts. Nothing is sent: the handler returns a sanitised copy.
 
 function redactEmail(email) {
   const [u, d] = String(email).split('@');

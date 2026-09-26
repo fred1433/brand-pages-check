@@ -25,10 +25,10 @@ jobs:
         include:
           - brand: vertical-printers
             project: VERCEL_PROJECT_VP
-            alias: vp-preview.theaipipe.com
+            prefix: vp
           - brand: brand-b
             project: VERCEL_PROJECT_BB
-            alias: brand-b-preview.theaipipe.com
+            prefix: bb
     env:
       VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ vars[matrix.project] }}
@@ -42,22 +42,27 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: preview-${{ matrix.brand }}
-          path: apps/${{ matrix.brand }}/.vercel/output
+          path: apps/${{ matrix.brand }}/.vercel
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ github.token }}
       - name: deploy the preview
         id: deploy
         working-directory: apps/${{ matrix.brand }}
+        env:
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
+          # One preview address per commit: the page reviewed is exactly the change that gets merged.
+          ALIAS="${{ matrix.prefix }}-${HEAD_SHA:0:7}.pr.theaipipe.com"
           URL=$(npx --yes vercel@latest deploy --prebuilt --yes --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
-          npx --yes vercel@latest alias set "$URL" ${{ matrix.alias }} --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects
-          echo "url=https://${{ matrix.alias }}" >> "$GITHUB_OUTPUT"
+          npx --yes vercel@latest alias set "$URL" "$ALIAS" --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects
+          echo "url=https://$ALIAS" >> "$GITHUB_OUTPUT"
       - run: npx playwright install --with-deps chromium
       - name: check the preview in a signed-out browser
         env:
           BP_BASE_URL: ${{ steps.deploy.outputs.url }}
           BP_BRAND: ${{ matrix.brand }}
           BP_EXPECT_ENV: preview
+          BP_MANIFEST: apps/${{ matrix.brand }}/.vercel/route-manifest.json
         run: npx playwright test
       - name: post the preview link on the pull request
         if: matrix.brand == 'vertical-printers'
@@ -66,4 +71,4 @@ jobs:
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           PR=$(gh api "repos/${{ github.repository }}/commits/$HEAD_SHA/pulls" --jq '.[0].number')
-          [ -n "$PR" ] && gh pr comment "$PR" --repo "${{ github.repository }}" --body "Preview ready, checked in a signed-out browser (forms go to the test list, no Ads requests): ${{ steps.deploy.outputs.url }}"
+          [ -n "$PR" ] && gh pr comment "$PR" --repo "${{ github.repository }}" --body "Preview of commit ${HEAD_SHA:0:7}, checked in a signed-out browser against its own pages (forms routed to the test list, no Ads requests): ${{ steps.deploy.outputs.url }}"
