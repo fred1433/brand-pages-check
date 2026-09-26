@@ -1,0 +1,22 @@
+---
+// Unstyled structure; each brand styles it through the data attributes.
+---
+<div data-consent-banner hidden role="dialog" aria-live="polite" aria-label="Cookie choice">
+  <p data-consent-text>We use cookies to measure visits and the ads that bring them. You choose.</p>
+  <div data-consent-actions>
+    <button type="button" data-consent="denied">Reject all</button>
+    <button type="button" data-consent="granted">Accept all</button>
+  </div>
+</div>
+<script>
+  import { consentState, setConsent, captureAttribution } from '@shared/tracking/client';
+  captureAttribution();
+  const banner = document.querySelector('[data-consent-banner]');
+  if (banner && !consentState()) banner.hidden = false;
+  banner?.querySelectorAll('[data-consent]').forEach((b) =>
+    b.addEventListener('click', () => {
+      setConsent(b.getAttribute('data-consent'));
+      banner.hidden = true;
+    })
+  );
+</script>

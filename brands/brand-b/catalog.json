@@ -1,0 +1,22 @@
+{
+  "brand": "brand-b",
+  "sections": {
+    "banner": {
+      "purpose": "Plain heading and sentence.",
+      "fields": {
+        "headline": { "type": "text", "required": true, "max": 70 },
+        "text": { "type": "text", "max": 220 }
+      }
+    },
+    "signup": {
+      "purpose": "Newsletter sign-up.",
+      "fields": {
+        "id": { "type": "anchor", "required": true },
+        "form": { "type": "formKey", "required": true },
+        "headline": { "type": "text", "required": true, "max": 70 },
+        "button": { "type": "text", "required": true, "max": 40 }
+      }
+    }
+  },
+  "quotes": {}
+}

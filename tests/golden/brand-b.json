@@ -1,0 +1,42 @@
+{
+  "tracking": {
+    "production": {
+      "brand": "brand-b",
+      "env": "production",
+      "mode": "advanced",
+      "ga4Id": "G-DEMOBB0001",
+      "gtmId": null,
+      "adsId": "AW-100000002",
+      "adsSendTo": {
+        "lead": "AW-100000002/demoLeadBB"
+      }
+    },
+    "preview": {
+      "brand": "brand-b",
+      "env": "preview",
+      "mode": "advanced",
+      "ga4Id": "G-TESTBB0001",
+      "gtmId": null,
+      "adsId": null,
+      "adsSendTo": {}
+    }
+  },
+  "forms": {
+    "newsletter": {
+      "production": {
+        "formKey": "newsletter",
+        "provider": "mailerlite",
+        "list": "Brand B newsletter (demo group)",
+        "environment": "production",
+        "conversion": "lead"
+      },
+      "preview": {
+        "formKey": "newsletter",
+        "provider": "mailerlite",
+        "list": "Brand B test group",
+        "environment": "preview",
+        "conversion": "lead"
+      }
+    }
+  }
+}

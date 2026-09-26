@@ -1,0 +1,32 @@
+title: The VP-G6 wall printer | Vertical Printers
+description: The VP-G6 is the wall printer we built to run our own business. Speed and reliability, with the team behind it.
+sections:
+  - type: hero
+    headline: The right printer. The right team.
+    text: Built for your wall printing business. Proven on real jobs, built and supported by people who run wall printers at scale.
+    image: hero-lab
+    cta:
+      label: Get the fact sheet
+      target: "#fact-sheet"
+  - type: machine
+    headline: The new industry standard
+    text: This is the wall printer we built to run our own business, because cheaper options cost more in the long run.
+  - type: walls
+    headline: Real clients. Real walls.
+    images: [wall-dragons, wall-cafe, wall-forest]
+  - type: founders
+    headline: Built by operators, for operators
+    text: |-
+      We're Marc and Mark, founders of Vertical Printers. We've spent almost ten years in wall printing, building and operating businesses just like the ones our customers are starting today.
+
+      We know where operators get stuck, what causes downtime, and what actually moves the needle.
+  - type: testimonials
+    headline: What our operators have said
+    quotes: [gene, charles-aileen]
+  - type: lead-form
+    id: fact-sheet
+    form: fact-sheet
+    headline: Download the VP-G6 fact sheet
+    text: Specs, what is included, and how the training works.
+    button: Send me the fact sheet
+    success: Thanks. The fact sheet is on its way to your inbox.

@@ -1,0 +1,13 @@
+{
+  "name": "@shared/forms",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/handler.mjs",
+    "./handler": "./src/handler.mjs",
+    "./destinations": "./src/destinations.mjs",
+    "./adapters": "./src/adapters.mjs",
+    "./client": "./src/client.mjs"
+  },
+  "dependencies": { "@shared/tracking": "workspace:*" }
+}

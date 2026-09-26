@@ -1,0 +1,12 @@
+---
+const { id, form, headline, button } = Astro.props;
+---
+<section id={id}>
+  <h2>{headline}</h2>
+  <form data-lead-form data-form-key={form}>
+    <input name="firstName" placeholder="First name" />
+    <input name="email" type="email" placeholder="Email" required />
+    <button type="submit">{button}</button>
+    <p data-lead-status role="status"></p>
+  </form>
+</section>

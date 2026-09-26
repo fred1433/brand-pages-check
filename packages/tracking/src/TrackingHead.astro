@@ -1,0 +1,10 @@
+---
+import { trackingPlan } from './plan.mjs';
+import { headScript, gtagSrc } from './head-script.mjs';
+const { brand, deployEnv } = Astro.props;
+const plan = trackingPlan(brand, deployEnv);
+const src = gtagSrc(plan);
+---
+<script is:inline set:html={headScript(plan)}></script>
+{src && <script is:inline async src={src}></script>}
+<meta name="bp-deploy-env" content={plan.env} />

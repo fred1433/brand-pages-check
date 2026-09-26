@@ -1,0 +1,17 @@
+---
+const { headline, steps } = Astro.props;
+---
+<section class="px-4 py-20 sm:px-10 sm:py-24">
+  <div class="mx-auto max-w-[1280px]">
+    <h2 class="vp-title max-w-[20ch] text-[36px] text-ink sm:text-[52px]">{headline}</h2>
+    <ol class={`mt-12 grid gap-10 ${steps.length === 4 ? 'md:grid-cols-4' : steps.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+      {steps.map((s, i) => (
+        <li class="border-t-2 border-ink pt-6">
+          <span class="grid h-11 w-11 place-items-center rounded-full bg-ink font-sans text-[15px] font-medium text-white">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-6 font-display text-[22px] text-ink">{s.title}</h3>
+          <p class="vp-book mt-3 text-[16px] leading-relaxed text-mute">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

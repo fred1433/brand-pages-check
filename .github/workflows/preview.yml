@@ -1,0 +1,65 @@
+name: preview
+# Runs from main's copy of this file after the checks of a pull request, so a pull request cannot
+# change how previews are deployed or reach the deployment token.
+on:
+  workflow_run:
+    workflows: [checks]
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    environment: preview
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - brand: vertical-printers
+            project: VERCEL_PROJECT_VP
+            alias: vp-preview.theaipipe.com
+          - brand: brand-b
+            project: VERCEL_PROJECT_BB
+            alias: brand-b-preview.theaipipe.com
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars[matrix.project] }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 8.15.1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: preview-${{ matrix.brand }}
+          path: apps/${{ matrix.brand }}/.vercel/output
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: deploy the preview
+        id: deploy
+        working-directory: apps/${{ matrix.brand }}
+        run: |
+          URL=$(npx --yes vercel@latest deploy --prebuilt --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
+          npx --yes vercel@latest alias set "$URL" ${{ matrix.alias }} --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects
+          echo "url=https://${{ matrix.alias }}" >> "$GITHUB_OUTPUT"
+      - run: npx playwright install --with-deps chromium
+      - name: check the preview in a signed-out browser
+        env:
+          BP_BASE_URL: ${{ steps.deploy.outputs.url }}
+          BP_BRAND: ${{ matrix.brand }}
+          BP_EXPECT_ENV: preview
+        run: npx playwright test
+      - name: post the preview link on the pull request
+        if: matrix.brand == 'vertical-printers'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          PR=$(gh api "repos/${{ github.repository }}/commits/$HEAD_SHA/pulls" --jq '.[0].number')
+          [ -n "$PR" ] && gh pr comment "$PR" --repo "${{ github.repository }}" --body "Preview ready, checked in a signed-out browser (forms go to the test list, no Ads requests): ${{ steps.deploy.outputs.url }}"

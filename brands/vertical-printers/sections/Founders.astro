@@ -1,0 +1,14 @@
+---
+import { asset } from './assets';
+const { headline, text } = Astro.props;
+const img = asset('founders');
+---
+<section class="px-4 py-20 sm:px-10 sm:py-24">
+  <div class="mx-auto grid max-w-[1280px] items-center gap-12 lg:grid-cols-2">
+    <img src={img.src} alt={img.alt} loading="lazy" class="aspect-[4/5] w-full rounded-[18px] object-cover lg:aspect-[5/6]" />
+    <div>
+      <h2 class="vp-title text-[36px] text-ink sm:text-[52px]">{headline}</h2>
+      {String(text).split(/\n\n+/).map((p) => <p class="vp-book mt-5 max-w-[50ch] text-[18px] leading-relaxed text-mute">{p}</p>)}
+    </div>
+  </div>
+</section>

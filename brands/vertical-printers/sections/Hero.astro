@@ -1,0 +1,18 @@
+---
+import Button from './Button.astro';
+import { asset } from './assets';
+const { headline, text, image = 'hero-lab', cta } = Astro.props;
+const img = asset(image);
+---
+<section class="px-4 sm:px-10">
+  <div class="relative mx-auto max-w-[1280px] overflow-hidden rounded-[18px] bg-panel text-white">
+    <img src={img.src} alt={img.alt} class="absolute inset-0 h-full w-full object-cover opacity-70" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10"></div>
+    <div class="relative flex min-h-[520px] flex-col justify-end px-6 pb-10 pt-40 sm:min-h-[600px] sm:px-14 sm:pb-14">
+      <h1 class="vp-title max-w-[15ch] text-[44px] sm:text-[72px]">{headline}</h1>
+      {text && <p class="vp-book mt-5 max-w-[46ch] text-[17px] leading-relaxed text-white/85 sm:text-[19px]">{text}</p>}
+      {cta && <div class="mt-9"><Button href={cta.target} label={cta.label} /></div>}
+      <div class="mt-12 h-px w-full bg-white/25"></div>
+    </div>
+  </div>
+</section>

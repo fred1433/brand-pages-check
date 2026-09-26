@@ -1,0 +1,13 @@
+{
+  "name": "@shared/tracking",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/plan.mjs",
+    "./plan": "./src/plan.mjs",
+    "./head": "./src/head-script.mjs",
+    "./client": "./src/client.mjs",
+    "./TrackingHead.astro": "./src/TrackingHead.astro",
+    "./ConsentBanner.astro": "./src/ConsentBanner.astro"
+  }
+}

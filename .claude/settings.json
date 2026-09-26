@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(pnpm check:pages)",
+      "Bash(pnpm -s check:pages)",
+      "Bash(pnpm check:fast)",
+      "Bash(pnpm -s check:fast)",
+      "Bash(node scripts/check-pages.mjs)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git switch *)",
+      "Bash(git checkout -b *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push -u origin *)",
+      "Bash(git pull *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr view *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh run view *)",
+      "Edit(apps/*/content/pages/**)",
+      "Write(apps/*/content/pages/**)"
+    ],
+    "deny": [
+      "Edit(packages/**)",
+      "Write(packages/**)",
+      "Edit(brands/*/brand.config.json)",
+      "Write(brands/*/brand.config.json)",
+      "Edit(tests/**)",
+      "Write(tests/**)",
+      "Edit(.github/**)",
+      "Write(.github/**)",
+      "Edit(.claude/**)",
+      "Write(.claude/**)",
+      "Edit(scripts/**)",
+      "Write(scripts/**)",
+      "Read(~/Library/Application Support/com.vercel.cli/**)",
+      "Bash(vercel *)",
+      "Bash(npx vercel *)",
+      "Bash(pnpm dlx vercel *)",
+      "Bash(gh api *)",
+      "Bash(gh secret *)",
+      "Bash(gh repo edit *)",
+      "Bash(gh pr merge * --admin*)",
+      "Bash(git push origin main*)",
+      "Bash(git push * --force*)",
+      "Bash(git commit * --no-verify*)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "denyRead": ["~/Library/Application Support/com.vercel.cli"],
+      "denyWrite": ["packages", "tests", ".github", ".claude", "scripts", "brands/vertical-printers/brand.config.json", "brands/brand-b/brand.config.json"]
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/before-publish.mjs\"", "timeout": 180 }
+        ]
+      }
+    ]
+  }
+}

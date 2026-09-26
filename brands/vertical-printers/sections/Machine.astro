@@ -1,0 +1,31 @@
+---
+import { asset } from './assets';
+const defaultSpecs = [
+  'Up to 16 ft print height',
+  'Built on the Ricoh Gen6 print head',
+  'Vacuum pressurized ink system',
+  'Helical rack and pinion drive',
+  'Easy to assemble, level track',
+];
+const { headline, text, specs = defaultSpecs } = Astro.props;
+const img = asset('g6');
+---
+<section class="px-4 py-20 sm:px-10 sm:py-28">
+  <div class="mx-auto grid max-w-[1280px] items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+    <div class="relative mx-auto w-full max-w-[460px] rounded-[18px] bg-mist px-10 pb-6 pt-10">
+      <div class="vp-dots absolute left-6 top-10 h-40 w-32 opacity-25" aria-hidden="true"></div>
+      <img src={img.src} alt={img.alt} class="relative mx-auto h-[440px] w-auto object-contain sm:h-[520px]" />
+    </div>
+    <div>
+      <h2 class="vp-title text-[38px] text-ink sm:text-[54px]">{headline}</h2>
+      {text && <p class="vp-book mt-5 max-w-[52ch] text-[18px] leading-relaxed text-mute">{text}</p>}
+      <ul class="mt-9 border-t border-line">
+        {specs.map((s) => (
+          <li class="flex items-baseline gap-4 border-b border-line py-4 font-sans text-[17px] text-body">
+            <span class="h-2 w-2 shrink-0 translate-y-[-2px] rounded-full bg-ink" aria-hidden="true"></span>{s}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

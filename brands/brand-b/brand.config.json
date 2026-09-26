@@ -1,0 +1,19 @@
+{
+  "slug": "brand-b",
+  "name": "Brand B (test fixture)",
+  "productionHost": "brand-b-demo.theaipipe.com",
+  "demoNotice": "Test fixture used to prove brand separation.",
+  "tracking": {
+    "mode": "advanced",
+    "ga4": { "production": "G-DEMOBB0001", "preview": "G-TESTBB0001" },
+    "ads": { "conversionId": "AW-100000002", "labels": { "lead": "demoLeadBB" } },
+    "gtm": null
+  },
+  "forms": {
+    "newsletter": {
+      "provider": "mailerlite",
+      "destination": { "production": "Brand B newsletter (demo group)", "preview": "Brand B test group" },
+      "conversion": "lead"
+    }
+  }
+}

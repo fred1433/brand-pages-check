@@ -1,0 +1,18 @@
+---
+import catalog from '../catalog.json';
+const { headline, quotes } = Astro.props;
+const list = quotes.map((id) => catalog.quotes[id]);
+---
+<section class="px-4 py-20 sm:px-10 sm:py-24">
+  <div class="mx-auto max-w-[1280px]">
+    <h2 class="vp-title max-w-[22ch] text-[36px] text-ink sm:text-[52px]">{headline}</h2>
+    <div class={`mt-12 grid gap-6 ${list.length > 1 ? 'md:grid-cols-2' : ''}`}>
+      {list.map((q) => (
+        <figure class="rounded-[18px] bg-mist p-8 sm:p-10">
+          <blockquote class="vp-book text-[19px] leading-relaxed text-body">"{q.text}"</blockquote>
+          <figcaption class="mt-6 font-sans text-[15px] font-medium text-ink">{q.who}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

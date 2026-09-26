@@ -1,0 +1,24 @@
+---
+const { href, label, tone = 'light', type } = Astro.props;
+const base = 'group inline-flex items-center gap-4 rounded-full pl-6 pr-1.5 py-1.5 font-sans font-medium text-[15px] uppercase tracking-[0.02em] transition-colors';
+const tones = {
+  light: 'bg-white text-ink hover:bg-mist',
+  dark: 'bg-ink text-white hover:bg-panel',
+};
+const dot = tone === 'light' ? 'bg-ink text-white' : 'bg-white text-ink';
+---
+{type ? (
+  <button type={type} class={`${base} ${tones[tone]} disabled:opacity-60`}>
+    <span>{label}</span>
+    <span class={`grid h-10 w-10 place-items-center rounded-full ${dot}`} aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </span>
+  </button>
+) : (
+  <a href={href} class={`${base} ${tones[tone]}`}>
+    <span>{label}</span>
+    <span class={`grid h-10 w-10 place-items-center rounded-full ${dot}`} aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </span>
+  </a>
+)}

@@ -1,0 +1,20 @@
+{
+  "name": "@apps/brand-b",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "dev": "astro dev"
+  },
+  "dependencies": {
+    "@astrojs/node": "11.1.6",
+    "@astrojs/vercel": "11.0.11",
+    "@brands/brand-b": "workspace:*",
+    "@shared/forms": "workspace:*",
+    "@shared/tracking": "workspace:*",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.3.5",
+    "tailwindcss": "4.3.3",
+    "yaml": "2.9.1"
+  }
+}

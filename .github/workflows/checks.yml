@@ -1,0 +1,102 @@
+name: checks
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    name: pages and unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 8.15.1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/check-pages.mjs
+      - run: node --test tests/unit/
+
+  brand:
+    name: brand ${{ matrix.brand }}
+    needs: pages
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        brand: [vertical-printers, brand-b]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 8.15.1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: npx playwright install --with-deps chromium
+      - name: build (preview and production)
+        run: |
+          node scripts/build-brand.mjs ${{ matrix.brand }} preview
+          node scripts/build-brand.mjs ${{ matrix.brand }} production
+      - name: links
+        run: BP_ONLY=${{ matrix.brand }} node scripts/check-links.mjs
+      - name: tracking and forms in a real browser
+        run: BP_BRANDS=${{ matrix.brand }} npx playwright test
+      - name: build the preview deployment
+        run: node scripts/build-brand.mjs ${{ matrix.brand }} preview vercel
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ matrix.brand }}
+          path: apps/${{ matrix.brand }}/.vercel/output
+          include-hidden-files: true
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-${{ matrix.brand }}
+          path: test-results/e2e.json
+          retention-days: 14
+
+  separation:
+    name: brand separation
+    needs: pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 8.15.1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - name: fingerprint of the live version (main)
+        run: |
+          git worktree add ../base origin/main
+          cd ../base && pnpm install --frozen-lockfile
+          for b in $(ls apps); do node scripts/build-brand.mjs "$b" production; done
+          node scripts/fingerprint.mjs --save ${{ runner.temp }}/base.json
+      - run: pnpm install --frozen-lockfile
+      - name: compare
+        run: |
+          for b in $(ls apps); do node scripts/build-brand.mjs "$b" production; done
+          CHANGED=$(git diff --name-only origin/main...HEAD | node scripts/changed-brands.mjs)
+          echo "Brands this change is meant for: ${CHANGED:-none}"
+          node scripts/fingerprint.mjs --verify
+          BP_CHANGED_BRANDS="$CHANGED" node scripts/fingerprint.mjs --compare ${{ runner.temp }}/base.json
+
+  all-checks:
+    name: all checks passed
+    if: always()
+    needs: [pages, brand, separation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: every required job succeeded (skipped or cancelled counts as failed)
+        run: |
+          echo '${{ toJSON(needs) }}' | node -e '
+            const n = JSON.parse(require("fs").readFileSync(0, "utf8"));
+            const bad = Object.entries(n).filter(([, v]) => v.result !== "success");
+            for (const [k, v] of bad) console.log(`${k}: ${v.result}`);
+            process.exit(bad.length ? 1 : 0);'

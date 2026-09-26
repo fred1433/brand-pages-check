@@ -1,0 +1,24 @@
+{
+  "slug": "vertical-printers",
+  "name": "Vertical Printers",
+  "productionHost": "vp-demo.theaipipe.com",
+  "demoNotice": "Demonstration copy. Your live website and accounts have not been changed.",
+  "tracking": {
+    "mode": "advanced",
+    "ga4": { "production": "G-DEMOVP0001", "preview": "G-TESTVP0001" },
+    "ads": { "conversionId": "AW-100000001", "labels": { "lead": "demoLeadVP" } },
+    "gtm": null
+  },
+  "forms": {
+    "demo-request": {
+      "provider": "activecampaign",
+      "destination": { "production": "VP demo requests (demo list)", "preview": "VP test list" },
+      "conversion": "lead"
+    },
+    "fact-sheet": {
+      "provider": "activecampaign",
+      "destination": { "production": "VP fact sheet requests (demo list)", "preview": "VP test list" },
+      "conversion": "lead"
+    }
+  }
+}

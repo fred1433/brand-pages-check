@@ -1,0 +1,19 @@
+---
+const { headline, items } = Astro.props;
+---
+<section class="px-4 py-20 sm:px-10 sm:py-24">
+  <div class="mx-auto max-w-[900px]">
+    <h2 class="vp-title text-[36px] text-ink sm:text-[52px]">{headline}</h2>
+    <div class="mt-10 border-t border-line">
+      {items.map((it) => (
+        <details class="group border-b border-line py-6">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-[20px] text-ink">
+            {it.q}
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink text-[18px] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="vp-book mt-4 max-w-[60ch] text-[17px] leading-relaxed text-mute">{it.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

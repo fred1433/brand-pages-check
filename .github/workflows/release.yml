@@ -1,0 +1,78 @@
+name: release
+# Publishing. Builds the live version of each brand, deploys it without giving it the live domain,
+# runs the browser checks against that exact deployment, and only then promotes it.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: production
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - brand: vertical-printers
+            project: VERCEL_PROJECT_VP
+          - brand: brand-b
+            project: VERCEL_PROJECT_BB
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars[matrix.project] }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 8.15.1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - name: skip brands this commit does not touch
+        id: scope
+        run: |
+          CHANGED=$(git -c core.quotepath=off diff --name-only HEAD~1 HEAD 2>/dev/null | node scripts/changed-brands.mjs || true)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || echo ",$CHANGED," | grep -q ",${{ matrix.brand }},"; then echo "go=1" >> "$GITHUB_OUTPUT"; else echo "Nothing to publish for ${{ matrix.brand }}"; fi
+        shell: bash
+      - name: build the live version
+        if: steps.scope.outputs.go
+        run: node scripts/build-brand.mjs ${{ matrix.brand }} production vercel
+      - name: deploy without the live domain (staged)
+        if: steps.scope.outputs.go
+        id: staged
+        working-directory: apps/${{ matrix.brand }}
+        run: |
+          URL=$(npx --yes vercel@latest deploy --prebuilt --prod --skip-domain --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Staged: $URL"
+      - if: steps.scope.outputs.go
+        run: npx playwright install --with-deps chromium
+      - name: check the staged live build in a browser
+        if: steps.scope.outputs.go
+        env:
+          BP_BASE_URL: ${{ steps.staged.outputs.url }}
+          BP_BRAND: ${{ matrix.brand }}
+          BP_EXPECT_ENV: production
+        run: npx playwright test
+      - name: promote the tested deployment to the live domain
+        if: steps.scope.outputs.go
+        run: npx --yes vercel@latest promote "${{ steps.staged.outputs.url }}" --yes --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects
+      - name: record
+        if: always() && steps.scope.outputs.go
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<SUM
+          commit ${{ github.sha }} / brand ${{ matrix.brand }} / staged ${{ steps.staged.outputs.url }} / outcome ${{ job.status }}
+          SUM
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.scope.outputs.go
+        with:
+          name: release-e2e-${{ matrix.brand }}
+          path: test-results/e2e.json
+          retention-days: 30

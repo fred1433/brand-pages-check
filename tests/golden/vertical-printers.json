@@ -1,0 +1,58 @@
+{
+  "tracking": {
+    "production": {
+      "brand": "vertical-printers",
+      "env": "production",
+      "mode": "advanced",
+      "ga4Id": "G-DEMOVP0001",
+      "gtmId": null,
+      "adsId": "AW-100000001",
+      "adsSendTo": {
+        "lead": "AW-100000001/demoLeadVP"
+      }
+    },
+    "preview": {
+      "brand": "vertical-printers",
+      "env": "preview",
+      "mode": "advanced",
+      "ga4Id": "G-TESTVP0001",
+      "gtmId": null,
+      "adsId": null,
+      "adsSendTo": {}
+    }
+  },
+  "forms": {
+    "demo-request": {
+      "production": {
+        "formKey": "demo-request",
+        "provider": "activecampaign",
+        "list": "VP demo requests (demo list)",
+        "environment": "production",
+        "conversion": "lead"
+      },
+      "preview": {
+        "formKey": "demo-request",
+        "provider": "activecampaign",
+        "list": "VP test list",
+        "environment": "preview",
+        "conversion": "lead"
+      }
+    },
+    "fact-sheet": {
+      "production": {
+        "formKey": "fact-sheet",
+        "provider": "activecampaign",
+        "list": "VP fact sheet requests (demo list)",
+        "environment": "production",
+        "conversion": "lead"
+      },
+      "preview": {
+        "formKey": "fact-sheet",
+        "provider": "activecampaign",
+        "list": "VP test list",
+        "environment": "preview",
+        "conversion": "lead"
+      }
+    }
+  }
+}

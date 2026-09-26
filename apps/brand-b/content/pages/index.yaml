@@ -1,0 +1,11 @@
+title: Brand B
+description: Test fixture page for brand separation.
+sections:
+  - type: banner
+    headline: Brand B
+    text: A second brand on the same platform, kept separate.
+  - type: signup
+    id: signup
+    form: newsletter
+    headline: Get the newsletter
+    button: Subscribe

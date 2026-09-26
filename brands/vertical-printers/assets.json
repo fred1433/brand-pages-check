@@ -1,0 +1,12 @@
+{
+  "hero-lab": { "file": "hero.webp", "alt": "A wall printer in the Vertical Printers workshop", "credit": "verticalprinters.com" },
+  "g6": { "file": "g6-isolated.webp", "alt": "The VP-G6 vertical wall printer", "credit": "verticalprinters.com" },
+  "g6-dots": { "file": "g6-home.webp", "alt": "The VP-G6 vertical wall printer", "credit": "verticalprinters.com" },
+  "founders": { "file": "wall1.webp", "alt": "Marc and Mark, founders of Vertical Printers, in their workshop", "credit": "verticalprinters.com" },
+  "wall-dragons": { "file": "wall2.webp", "alt": "A school gym wall printed with the Dragons team name", "credit": "verticalprinters.com" },
+  "wall-forest": { "file": "wall3.webp", "alt": "A forest mural printed along a corridor, with the printer on its track", "credit": "verticalprinters.com" },
+  "wall-cafe": { "file": "img3780.webp", "alt": "A whale mural printed in a busy cafe", "credit": "verticalprinters.com" },
+  "wall-car": { "file": "clauser-mural.webp", "alt": "A car cut-out mural above a sofa", "credit": "verticalprinters.com" },
+  "wall-scaffold": { "file": "liam-scaffolding.webp", "alt": "Printing a large industrial wall from scaffolding", "credit": "verticalprinters.com" },
+  "support-call": { "file": "transform.webp", "alt": "A support call with the Vertical Printers team", "credit": "verticalprinters.com" }
+}

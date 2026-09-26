@@ -1,0 +1,10 @@
+{
+  "name": "@brands/brand-b",
+  "private": true,
+  "type": "module",
+  "exports": { "./*": "./*" },
+  "dependencies": {
+    "@shared/forms": "workspace:*",
+    "@shared/tracking": "workspace:*"
+  }
+}

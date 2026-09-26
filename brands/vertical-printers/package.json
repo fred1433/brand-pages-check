@@ -1,0 +1,10 @@
+{
+  "name": "@brands/vertical-printers",
+  "private": true,
+  "type": "module",
+  "exports": { "./*": "./*" },
+  "dependencies": {
+    "@shared/forms": "workspace:*",
+    "@shared/tracking": "workspace:*"
+  }
+}
