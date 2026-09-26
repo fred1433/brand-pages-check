@@ -17,7 +17,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { version: 8.15.1 }
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version: 24, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: node scripts/check-pages.mjs
       - run: node --test tests/unit/
@@ -35,7 +35,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { version: 8.15.1 }
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version: 24, cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: npx playwright install --with-deps chromium
       - name: build (preview and production)
@@ -71,7 +71,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { version: 8.15.1 }
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: pnpm }
+        with: { node-version: 24, cache: pnpm }
       - name: fingerprint of the live version (main)
         run: |
           git worktree add ../base origin/main
