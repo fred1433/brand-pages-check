@@ -1,0 +1,41 @@
+title: Request a VP-G6 demonstration | Vertical Printers
+description: See the VP-G6 wall printer at work and talk to the team that built it to run their own wall printing business.
+sections:
+  - type: hero
+    headline: See the VP-G6 print a wall
+    text: Built for your wall printing business. Ask for a demonstration and see the printer we built to run our own business, with the team behind it.
+    image: hero-lab
+    cta:
+      label: Request a demo
+      target: "#demo"
+  - type: machine
+    headline: The new industry standard
+    text: This is the wall printer we built to run our own business, because cheaper options cost more in the long run.
+  - type: walls
+    headline: Real clients. Real walls.
+    images: [wall-dragons, wall-cafe, wall-forest, wall-scaffold]
+  - type: steps
+    headline: What happens next
+    steps:
+      - title: Tell us about you
+        text: Leave your first name and email below.
+      - title: We get in touch
+        text: Someone from the team contacts you to set up your demonstration.
+      - title: See it print
+        text: Watch the VP-G6 print at our facility in Asheville, North Carolina, and ask the people who run wall printers every day.
+  - type: founders
+    headline: Built by operators, for operators
+    text: |-
+      We're Marc and Mark, founders of Vertical Printers. We've spent almost ten years in wall printing, building and operating businesses just like the ones our customers are starting today.
+
+      We know where operators get stuck, what causes downtime, and what actually moves the needle.
+  - type: testimonials
+    headline: What our operators have said
+    quotes: [justin, shawn-rita]
+  - type: lead-form
+    id: demo
+    form: demo-request
+    headline: Request a VP-G6 demonstration
+    text: Tell us where to reach you and we will get in touch to arrange it.
+    button: Request my demo
+    success: Thanks. We will be in touch soon to arrange your demonstration.
