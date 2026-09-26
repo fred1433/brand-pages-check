@@ -8,11 +8,11 @@
     "build": "pnpm -r --filter './apps/*' build",
     "build:brand": "node scripts/build-brand.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "test:unit": "node --test tests/unit/",
+    "test:unit": "node --test tests/unit/*.test.mjs",
     "test:e2e": "playwright test",
     "check:separation": "node scripts/fingerprint.mjs --verify",
     "check": "node scripts/check-all.mjs",
-    "check:fast": "node scripts/check-pages.mjs && node --test tests/unit/"
+    "check:fast": "node scripts/check-pages.mjs && node --test tests/unit/*.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

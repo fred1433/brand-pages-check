@@ -2,7 +2,7 @@
 import { execSync } from 'node:child_process';
 import { brands } from './lib.mjs';
 
-const steps = [['Pages', 'node scripts/check-pages.mjs'], ['Unit tests', 'node --test tests/unit/']];
+const steps = [['Pages', 'node scripts/check-pages.mjs'], ['Unit tests', 'node --test tests/unit/*.test.mjs']];
 for (const b of brands()) for (const env of ['preview', 'production']) steps.push([`Build ${b} (${env})`, `node scripts/build-brand.mjs ${b} ${env}`]);
 steps.push(['Links', 'node scripts/check-links.mjs'], ['Brand separation', 'node scripts/fingerprint.mjs --verify'], ['Tracking and forms in a real browser', 'npx playwright test']);
 for (const [name, cmd] of steps) {
