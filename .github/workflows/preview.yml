@@ -49,7 +49,7 @@ jobs:
         id: deploy
         working-directory: apps/${{ matrix.brand }}
         run: |
-          URL=$(npx --yes vercel@latest deploy --prebuilt --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
+          URL=$(npx --yes vercel@latest deploy --prebuilt --yes --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
           npx --yes vercel@latest alias set "$URL" ${{ matrix.alias }} --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects
           echo "url=https://${{ matrix.alias }}" >> "$GITHUB_OUTPUT"
       - run: npx playwright install --with-deps chromium

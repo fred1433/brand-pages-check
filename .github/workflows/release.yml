@@ -49,7 +49,7 @@ jobs:
         id: staged
         working-directory: apps/${{ matrix.brand }}
         run: |
-          URL=$(npx --yes vercel@latest deploy --prebuilt --prod --skip-domain --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
+          URL=$(npx --yes vercel@latest deploy --prebuilt --prod --skip-domain --yes --token "${{ secrets.VERCEL_TOKEN }}" --scope fred1433s-projects)
           echo "url=$URL" >> "$GITHUB_OUTPUT"
           echo "Staged: $URL"
       - if: steps.scope.outputs.go
