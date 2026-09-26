@@ -54,16 +54,41 @@
     "enabled": true,
     "allowUnsandboxedCommands": false,
     "filesystem": {
-      "denyRead": ["~/Library/Application Support/com.vercel.cli"],
-      "denyWrite": ["packages", "tests", ".github", ".claude", "scripts", "brands/vertical-printers/brand.config.json", "brands/brand-b/brand.config.json"]
-    }
+      "denyRead": [
+        "~/Library/Application Support/com.vercel.cli"
+      ],
+      "denyWrite": [
+        "packages",
+        "tests",
+        ".github",
+        ".claude",
+        "scripts",
+        "brands/vertical-printers/brand.config.json",
+        "brands/brand-b/brand.config.json"
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "codeload.github.com",
+        "objects.githubusercontent.com",
+        "registry.npmjs.org"
+      ]
+    },
+    "failIfUnavailable": true,
+    "enableWeakerNetworkIsolation": true
   },
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/before-publish.mjs\"", "timeout": 180 }
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/before-publish.mjs\"",
+            "timeout": 180
+          }
         ]
       }
     ]

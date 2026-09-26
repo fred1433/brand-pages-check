@@ -8,3 +8,4 @@ playwright-report/
 !.env.example
 run-records/raw/
 dist-*/
+.claude/settings.local.json

@@ -9,7 +9,7 @@ const FORBIDDEN = [
   [/\bgit\s+push\b[^\n]*\b(main|master)\b/, 'Publishing goes through a pull request. Pushing to main directly is not allowed.'],
   [/--no-verify\b/, 'Skipping checks is not allowed.'],
   [/\bgh\s+pr\s+merge\b[^\n]*--admin\b/, 'Merging around the required checks is not allowed.'],
-  [/\b(vercel|npx\s+vercel)\b/, 'Deployments are done by the publishing workflow, not from this session.'],
+  [/(^|[;&|(]\s*|\bnpx\s+(--yes\s+)?|\bpnpm\s+dlx\s+|\bnpm\s+exec\s+)vercel(@\S+)?(\s|$)/, 'Deployments are done by the publishing workflow, not from this session.'],
   [/\bgit\s+push\b[^\n]*(--force|-f\b)/, 'Force-pushing is not allowed.'],
 ];
 const GATED = /\b(git\s+commit|git\s+push|gh\s+pr\s+create)\b/;
