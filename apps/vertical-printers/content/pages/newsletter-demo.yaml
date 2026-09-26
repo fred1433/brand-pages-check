@@ -13,7 +13,6 @@ sections:
     images: [wall-dragons, wall-cafe, wall-forest, wall-scaffold]
   - type: lead-form
     id: demo
-    form: demo-request
     headline: Request a VP-G6 demonstration
     text: Tell us where to reach you and we will get in touch to arrange it.
     button: Request my demo
